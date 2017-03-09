@@ -70,20 +70,20 @@ cd $drupal_path
 printf "Changing ownership of all contents of "${drupal_path}":\n user => "${drupal_user}" \t group => "${httpd_group}"\n"
 chown -R ${drupal_user}:${httpd_group} .
 
-printf "Changing permissions of all directories inside "${drupal_path}" to "rwxr-x---"...\n"
-find . -type d -exec chmod u=rwx,g=rx,o= '{}' \;
+printf "Changing permissions of all directories inside "${drupal_path}" to "rwxr-xr-x"...\n"
+find . -type d -exec chmod u=rwx,g=rx,o=rx '{}' \;
 
-printf "Changing permissions of all files inside "${drupal_path}" to "rw-r-----"...\n"
-find . -type f -exec chmod u=rw,g=r,o= '{}' \;
+printf "Changing permissions of all files inside "${drupal_path}" to "rw-r--r--"...\n"
+find . -type f -exec chmod u=rw,g=r,o=r '{}' \;
 
-printf "Changing permissions of "files" directories in "${drupal_path}/sites" to "rwxrwx---"...\n"
+printf "Changing permissions of "files" directories in "${drupal_path}/sites" to "rwxrwxr-x"...\n"
 cd sites
-find . -type d -name files -exec chmod ug=rwx,o= '{}' \;
+find . -type d -name files -exec chmod ug=rwx,o=rx '{}' \;
 
-printf "Changing permissions of all files inside all "files" directories in "${drupal_path}/sites" to "rw-rw----"...\n"
-printf "Changing permissions of all directories inside all "files" directories in "${drupal_path}/sites" to "rwxrwx---"...\n"
+printf "Changing permissions of all files inside all "files" directories in "${drupal_path}/sites" to "rw-rw-r--"...\n"
+printf "Changing permissions of all directories inside all "files" directories in "${drupal_path}/sites" to "rwxrwxr-x"...\n"
 for x in ./*/files; do
-  find ${x} -type d -exec chmod ug=rwx,o= '{}' \;
-  find ${x} -type f -exec chmod ug=rw,o= '{}' \;
+  find ${x} -type d -exec chmod ug=rwx,o=rx '{}' \;
+  find ${x} -type f -exec chmod ug=rw,o=r '{}' \;
 done
 echo "Done setting proper permissions on files and directories"

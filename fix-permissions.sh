@@ -16,14 +16,6 @@ HELP
 exit 0
 }
 
-if [ $(id -u) != 0 ]; then
-  printf "**************************************\n"
-  printf "* Error: You must run this with sudo or root*\n"
-  printf "**************************************\n"
-  print_help
-  exit 1
-fi
-
 drupal_path=${1%/}
 drupal_user=${2}
 httpd_group="${3:-www-data}"

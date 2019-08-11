@@ -63,10 +63,10 @@ printf "Changing ownership of all contents of "${drupal_path}":\n user => "${dru
 chown -R ${drupal_user}:${httpd_group} .
 
 printf "Changing permissions of all directories inside "${drupal_path}" to "rwxr-xr-x"...\n"
-find . -type d -exec chmod u=rwx,g=rx,o=rx '{}' \;
+find . -type d -exec chmod u=rwx,g=rwx,o=rx '{}' \;
 
 printf "Changing permissions of all files inside "${drupal_path}" to "rw-r--r--"...\n"
-find . -type f -exec chmod u=rw,g=r,o=r '{}' \;
+find . -type f -exec chmod u=rw,g=rw,o=r '{}' \;
 
 printf "Changing permissions of "files" directories in "${drupal_path}/web/sites" to "rwxrwxr-x"...\n"
 cd web/sites

@@ -42,7 +42,7 @@ while [ "$#" -gt 0 ]; do
   shift
 done
 
-if [ -z "${drupal_path}" ] || [ ! -d "${drupal_path}/sites" ] || [ ! -f "${drupal_path}/core/modules/system/system.module" ] && [ ! -f "${drupal_path}/modules/system/system.module" ]; then
+if [ -z "${drupal_path}" ] || [ ! -d "${drupal_path}/web" ] || [ ! -d "${drupal_path}/web/sites" ] || [ ! -f "${drupal_path}/composer.json" ]; then
   printf "*********************************************\n"
   printf "* Error: Please provide a valid Drupal path. *\n"
   printf "*********************************************\n"
@@ -68,12 +68,12 @@ find . -type d -exec chmod u=rwx,g=rx,o=rx '{}' \;
 printf "Changing permissions of all files inside "${drupal_path}" to "rw-r--r--"...\n"
 find . -type f -exec chmod u=rw,g=r,o=r '{}' \;
 
-printf "Changing permissions of "files" directories in "${drupal_path}/sites" to "rwxrwxr-x"...\n"
-cd sites
+printf "Changing permissions of "files" directories in "${drupal_path}/web/sites" to "rwxrwxr-x"...\n"
+cd web/sites
 find . -type d -name files -exec chmod ug=rwx,o=rx '{}' \;
 
-printf "Changing permissions of all files inside all "files" directories in "${drupal_path}/sites" to "rw-rw-r--"...\n"
-printf "Changing permissions of all directories inside all "files" directories in "${drupal_path}/sites" to "rwxrwxr-x"...\n"
+printf "Changing permissions of all files inside all "files" directories in "${drupal_path}/web/sites" to "rw-rw-r--"...\n"
+printf "Changing permissions of all directories inside all "files" directories in "${drupal_path}/web/sites" to "rwxrwxr-x"...\n"
 for x in ./*/files; do
   find ${x} -type d -exec chmod ug=rwx,o=rx '{}' \;
   find ${x} -type f -exec chmod ug=rw,o=r '{}' \;
